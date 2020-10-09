@@ -31,13 +31,18 @@ def treefromlist(l):
     return t
 
 
-def inorderwalk(t):
+def inorderwalklist(t):
     if t == None:
-        return
+        return []
     key, left, right = t
-    inorderwalk(left)
-    print(key, end=" ")
-    inorderwalk(right)
+    return inorderwalklist(left) + [key] + inorderwalklist(right)
+
+
+def inorderwalk(t):
+    l = inorderwalklist(t)
+    for e in l:
+        print(e, end=" ")
+    print()
 
 
 def minimum(t):
@@ -75,7 +80,6 @@ def inorderwalktest(t, idx):
     print("================== in-order walk test %d ==================" % idx)
     print("tree %s" % str(t))
     inorderwalk(t)
-    print()
 
 
 def deletetest(t, x, idx):
