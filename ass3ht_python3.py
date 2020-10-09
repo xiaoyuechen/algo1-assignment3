@@ -1,6 +1,7 @@
 # This version is for Python 3.x.x
-# Name 1: 
-# Name 2: 
+# Name 1: Dmitrii Markov
+# Name 2: Mattias Kynde Hämberg
+# Name 2: Xiaoyue Chen
 
 import random
 
@@ -109,4 +110,3 @@ def testdna():
         rdna = randstring(10)
         insert(t, h4, rdna)
     output(t)
-
