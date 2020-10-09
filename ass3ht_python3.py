@@ -1,7 +1,7 @@
 # This version is for Python 3.x.x
 # Name 1: Dmitrii Markov
 # Name 2: Mattias Kynde Hämberg
-# Name 2: Xiaoyue Chen
+# Name 3: Xiaoyue Chen
 
 import random
 
