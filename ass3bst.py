@@ -2,13 +2,13 @@
 # Name 1:
 # Name 2:
 
+
 # Create empty tree
 def emptytree():
     return None
 
+
 # Insert x into tree t
-
-
 def insert(t, x):
     if t == None:
         return (x, None, None)
@@ -21,9 +21,8 @@ def insert(t, x):
         else:
             return (key, left, insert(right, x))
 
+
 # Create tree by inserting each element in l into an initially empty tree
-
-
 def treefromlist(l):
     t = emptytree()
     for x in range(0, (len(l))):
