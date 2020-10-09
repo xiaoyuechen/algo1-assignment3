@@ -40,12 +40,16 @@ def inorderwalk(t):
     inorderwalk(right)
 
 
-def deleteinordersuccessor(t):
-    key, left, right = t
-    if (left == None) and (right == None):
-        return (key, None)
-    successor_value, tleft = deleteinordersuccessor(left)
-    return (successor_value, (key, tleft, right))
+def minimum(t):
+    _, left, _ = t
+    if left == None:
+        return t
+    return minimum(left)
+
+
+def successorinchildren(node):
+    _, _, right = node
+    return minimum(right)
 
 
 def delete(t, x):
@@ -60,31 +64,46 @@ def delete(t, x):
         elif (left == None) and (right != None):
             return right
         elif (left != None) and (right != None):
-            successor_value, nt = deleteinordersuccessor(t)
-            return (successor_value, nt[1], nt[2])
+            skey, _, _ = successorinchildren(t)
+            return (skey, left, delete(right, skey))
     elif x < key:
         return (key, delete(left, x), right)
     return (key, left, delete(right, x))
 
 
-if __name__ == "__main__":
-    print("====== inorder walk test")
-    inorderwalk(treefromlist([10, 3, 5, 1]))
+def inorderwalktest(t, idx):
+    print("================== in-order walk test %d ==================" % idx)
+    print("tree %s" % str(t))
+    inorderwalk(t)
     print()
 
-    print("====== delete test 1")
-    t4 = treefromlist([2, 6, 7, 4, 1])
-    print("original tree")
-    print("remove 6")
-    print(t4)
-    t4 = delete(t4, 6)
-    print("result tree")
-    print(t4)
 
-    print("====== delete test 2")
-    print("original tree")
-    print("remove 1")
-    t5 = insert(emptytree(), 1)
-    t5 = delete(t5, 1)
-    print("result tree")
-    print(t5)
+def deletetest(t, x, idx):
+    print("================== delete test %d ==================" % idx)
+    print("before %s" % str(t))
+    print("delete %d" % x)
+    r = delete(t, x)
+    print("after %s" % str(r))
+
+
+if __name__ == "__main__":
+    t1 = treefromlist([10, 3, 5, 1])
+    inorderwalktest(t1, 1)
+
+    t2 = treefromlist([6, 2, 7, 0, 9, 8, 66, 3, 5, 1])
+    inorderwalktest(t2, 2)
+
+    t1 = treefromlist([2, 6, 7, 4, 1])
+    deletetest(t1, 6, 1)
+
+    t2 = insert(emptytree(), 1)
+    deletetest(t2, 1, 2)
+
+    t3 = treefromlist([1, 5, 3, 7, 0, 9])
+    deletetest(t3, 2, 3)
+
+    t4 = treefromlist([1, 5, 3, 7, 0, 9])
+    deletetest(t4, 5, 4)
+
+    t5 = treefromlist([7, 4, 5, 6, 2, 0, 9, 8])
+    deletetest(t5, 4, 5)
